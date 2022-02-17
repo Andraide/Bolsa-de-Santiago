@@ -5,13 +5,35 @@ const urlFullCastById = "https://imdb-api.com/en/API/FullCast/k_job2e7ku/"
 const urlAxes = "https://imdb-api.com/en/API/SearchMovie/k_job2e7ku/axe";
 const urlByTitle = "https://imdb-api.com/en/API/Title/k_job2e7ku/";
 
-async function getData(url) {
+const host = "https://startup.bolsadesantiago.com"
+const paths = 
+{
+    consulta: "/api/consulta/",
+    getInstrumentosValidos: "InstrumentosDisponibles/getInstrumentosValidos"
+}
+
+const url = new URL(host)
+url.search = "?access_token=E1F1BB3912B5491BB0AB9285A80E9FA7"
+const headers = 
+{
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+}
+const requestOptions = 
+{
+    method: 'POST',
+    headers
+}
+
+async function getData(path) {
         try {
-            const response = await fetch(url);
+            url.pathname = path
+            const response = await fetch(url.href, requestOptions);
+            console.log("res", response)
             const json = await response.json();
             return json
         } catch (error) {
-            console.log(error);
+            console.log("Error on getData", error);
         }
       }
 
@@ -32,7 +54,7 @@ async function getPromises(url ,ids)
                     }
                 })
             }).on('error', (e) => {
-                console.error("Got errpr", e.message);
+                console.error("Got error", e.message);
             })
         })
     })
@@ -119,7 +141,64 @@ async function getDuration(title) {
 
 }
 
+async function getInstrumentosValidos()
+{
+    const axes = await getData(paths.consulta + paths.getInstrumentosValidos)
+    return axes
+}
+
+async function getMoviesDB(query)
+{
+    let movies = await crud.find(Movie, query)
+    let movieFiltered = movies.map((movie) => {
+        const { Title, Year, Released, Genre, Director, Actors, Plot, Ratings } = movie
+        return { Title, Year, Released, Genre, Director, Actors, Plot, Ratings }
+    })
+    return movieFiltered
+}
+
+async function removeAll()
+{
+    crud.removeAll(Movie)
+}
+
+async function updateMovie(query)
+{
+    try 
+    {
+        let movieRecord = await crud.find(Movie, { Title: query.movie })
+        if(movieRecord[0])
+        {
+            if("Plot" in movieRecord[0])
+            {
+                let wordArray = movieRecord[0].Plot.split(" ")
+                for(let i=0; i< wordArray.length; i++)
+                {
+                    if(wordArray[i] == query.find)
+                    {
+                        movieRecord[0].Plot = movieRecord[0].Plot.replace(query.find, query.replace)    
+                    }
+                }
+        
+                await crud.update(Movie, query.movie, movieRecord[0].Plot)
+
+                return movieRecord[0].Plot
+            }
+        }
+        else
+        {
+            return "Nothing to update"
+        }
+    }
+    catch(err) 
+    {
+        throw err
+    }
+}
+
+
 module.exports = {
+    getInstrumentosValidos,
     getVikings,
     getVikingsDirectors,
     getAxes,
