@@ -1,50 +1,37 @@
+const { assert } = require("console");
+
 async function save(model, payload)
 {
+    const data = new model(payload);
     try 
     {
-        return await model.create(payload)
+        await data.save()
     }
     catch(err)
     {
-        console.log("Error on save", err)
+        console.log("Not saved", err)
         throw err
     }
-}
-
-async function findAll(model, query)
-{
-    try
-    {
-        let all = await model.findAll(query)
-        return all
-    }
-    catch(err)
-    {
-        console.log("Error on findAll", err)
-        throw err
-    }
-    
 }
 
 async function find(model, query)
 {
-    try
-    {
-        let findedOne = await model.findAll({ Where: query})
-        return findedOne
-    }
-    catch(err)
-    {
-        console.log("Error on findAll", err)
-        throw err
-    }
+    let responseDB = await model.find(query)
+    return responseDB
 }
 
 async function update(model, query, replace)
 {
     try 
     {
-        await model.update(replace, { Where: query })
+        console.log("Title", query)
+        console.log("Replace", replace)
+        let filter = { Title: query }
+        let updateObj = { Plot: replace }
+        await model.findOneAndUpdate(filter, updateObj, { new: true }, (err, doc) => {
+            if(err) console.log("Not updated")
+            console.log("Updated")
+        }).clone().catch(function(err){console.log("Update error", err)})
     }
     catch(err)
     {
@@ -55,24 +42,20 @@ async function update(model, query, replace)
 }
 
 
+
 async function removeAll(model)
 {
-    try
+    model.remove().then(function (model)
     {
-        await model.destroy({
-            truncate: true
-        })
-    }
-    catch(err)
+        console.log("Model removed")
+    }).catch(function (err)
     {
-        console.log("Error on removeAll", err)
-        throw err
-    }
+        assert.ok(err)
+    })
 }
 
 module.exports = {
     save,
-    findAll,
     find,
     update,
     removeAll

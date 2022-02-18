@@ -1,100 +1,82 @@
-const { DataTypes } = require('sequelize');
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 
-const user = {
+const user = new Schema ({
     userId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        primaryKey: true
+        type: String,
+        unique: true
     },
     firstName: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     lastName: {
-        type: DataTypes.STRING
+        type: String,
     }
-}
+})
 
-const instrument = {
-    instrumentId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+const instrument = new Schema ({
+    userId: {
+        type: String,
     },
     openPrice: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     trend: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     minPrice: {
-        type: DataTypes.STRING
+        type: String,
     },
     lastPrice: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     avgPrice: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     closingPrice: {
-        type: DataTypes.STRING
+        type: String,
     },
     highPrice: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     instruments: {
-        type: DataTypes.STRING,
-        allowNull: true
+        type: String,
     },
     lastPrice: {
-        type: DataTypes.STRING
+        type: String,
     },
     minPrice: {
-        type: DataTypes.STRING
+        type: String,
     },
     openPrice: {
-        type: DataTypes.STRING
+        type: String,
     },
     quantityLastTrade: {
-        type: DataTypes.STRING
+        type: String,
     },
     tradeVolume: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: String,
     },
     tradeAmount: {
-        type: DataTypes.STRING
+        type: String,
     },
     timeStamp: {
-        type: DataTypes.STRING
+        type: String,
     },
     trend: {
-        type: DataTypes.STRING
-    }
-}
-
-const suitcase = {
-    suitcaseId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        type: String,
     },
     stocksQuantity: {
-        type: DataTypes.STRING
+        type: String,
     },
     boughtPrice: {
-        type: DataTypes.STRING
+        type: String,
     }
-}
+})
+
 
 module.exports = {
     user,
-    instrument,
-    suitcase
+    instrument
 }

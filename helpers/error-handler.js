@@ -1,7 +1,7 @@
 module.exports = errorHandler;
 
 function errorHandler(err, req, res, next) {
-   
+    console.log("Handling error")
     if (typeof (err) === 'string') {
        
         console.log(err)

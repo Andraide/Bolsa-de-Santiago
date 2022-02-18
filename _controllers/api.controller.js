@@ -1,16 +1,34 @@
 ﻿const express = require('express');
 const router = express.Router();
 const moviesService = require('../_services/api.service');
+const suitcaseService = require('../_services/suitcase.service');
 const sequelize = require('../_db/connection')
 
 
 router.post('/getInstrumentosValidos', getInstrumentosValidos)
+router.post('/getUserInstruments', getUserInstruments)
 router.get('/test/db', testDb)
+router.get('/remove', removeAll)
 router.get('/vikings', getVikings);
 router.get('/vikings/directors', getVikingsDirectors);
 router.get('/axes', getAxes);
 router.get('/axes/characters', getAxesCharacters);
 router.get('/duration', getDuration);
+
+async function removeAll(req, res, next)
+{
+    suitcaseService.removeAll()
+        .then(msg => res.json(msg))
+        .catch(err => next(err));
+}
+
+async function getUserInstruments(req, res, next)
+{
+    console.log("Getting body", req.body)
+    suitcaseService.getUserInstruments()
+        .then(instrumentos => res.json(instrumentos))
+        .catch(err => next(err));
+}
 
 
 async function testDb()

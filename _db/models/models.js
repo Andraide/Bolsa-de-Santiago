@@ -1,16 +1,8 @@
-const sequelize = require('../connection')
-const {user, instrument, suitcase} = require('../schemes/schemes')
-const options = require('./options')
+const {user, instrument } = require('../schemes/schemes')
 
-const User = sequelize.define('User', user, options)
+const mongoose = require('mongoose');
 
-const Instrument = sequelize.define('Instrument', instrument, options)
+const User = mongoose.model('Users', user);
+const Instrument = mongoose.model('Intruments', instrument)
 
-const Suitcase = sequelize.define('Suitcase', suitcase, options)
-
-
-module.exports = {
-    User,
-    Instrument,
-    Suitcase
-}
+module.exports = { User, Instrument }
