@@ -1,9 +1,11 @@
 
-
-const mockSuitcase = {
-    id: '16543545-5',
+const mockUser = {
+    userId: '16543545-5',
     firstName: "Jose",
     lastName: "Risopatron",
+}
+
+const mockInstrument = {
     avgPrice: "27.8332",
     closingPrice: "27.36",
     highPrice: "28.76",
@@ -16,8 +18,15 @@ const mockSuitcase = {
     tradeAmount: "522712966",
     tradeVolume: "18783974",
     trend: "-",
+}
+
+const mockSuitcase = {
     stocksQuantity: "200",
     boughtPrice: "27.36"
 }
 
-module.exports = mockSuitcase
+module.exports = {
+    mockUser,
+    mockInstrument,
+    mockSuitcase
+}

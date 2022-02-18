@@ -3,6 +3,7 @@ async function save(model, payload)
     try 
     {
         await model.create(payload)
+        console.log("Data saved")
     }
     catch(err)
     {
