@@ -6,9 +6,10 @@ async function syncModels()
 {
     try 
     {
+        await Suitcase.sync({ force: true })
         await User.sync({ force: true })
         await Instrument.sync({ force: true })
-        await Suitcase.sync({ force: true })
+        
         console.log("Models sync")
     }
     catch(err)
@@ -21,12 +22,18 @@ async function saveMockData()
 {
     try
     {
-        console.log("Trying to save mock data")
-        let suitcase = await Suitcase.create(mockSuitcase)
-        let user = await User.create(mockUser)
+        //await Instrument.create(mockInstrument)
+        let suitcase = await crud.save(Suitcase, mockSuitcase) 
+        let user = await crud.save(User, mockUser) 
         await user.setSuitcase(suitcase)
-        await crud.save(Instrument, mockInstrument)
-       
+
+        /*
+        Pair saved association
+        let suitcase = await crud.save(Suitcase, mockSuitcase) 
+        let instrument = await crud.save(Instrument, mockInstrument)
+        */
+        let instrument = await crud.save(Instrument, mockInstrument)
+        await instrument.setSuitcase(suitcase)
     }
     catch(err)
     {
@@ -39,12 +46,19 @@ async function modelsAssociations()
 {
     try 
     {
+        
         User.hasOne(Suitcase, {
             onDelete: 'RESTRICT',
             onUpdate: 'RESTRICT',
             foreignKey: { name: 'userId', allowNull: true }
         })
         Suitcase.belongsTo(User, { foreignKey: 'userId', allowNull: true })
+
+        Suitcase.hasMany(Instrument, {
+            foreignKey: { name: 'suitcaseId', allowNull: true }
+        })
+        Instrument.belongsTo(Suitcase, { foreignKey: 'suitcaseId', allowNull: true })
+
     }
     catch(err)
     {
@@ -52,5 +66,21 @@ async function modelsAssociations()
     }
 }
 
-module.exports =  { saveMockData, syncModels, modelsAssociations } 
+
+async function removeModels()
+{
+    try
+    {
+        //await crud.removeAll(Instrument)
+        await crud.removeAll(Suitcase)
+        await crud.removeAll(User)
+        console.log("Models destroyed")    
+    }
+    catch(err)
+    {
+        console.log("Error on destroyAll", err)
+    }
+}
+
+module.exports =  { saveMockData, syncModels, modelsAssociations, removeModels } 
 

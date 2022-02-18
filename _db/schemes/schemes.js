@@ -17,6 +17,11 @@ const user = {
 }
 
 const instrument = {
+    instrumentId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     openPrice: {
         type: DataTypes.STRING,
         allowNull: false
@@ -45,7 +50,7 @@ const instrument = {
     },
     instruments: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
     },
     lastPrice: {
         type: DataTypes.STRING
@@ -75,6 +80,11 @@ const instrument = {
 }
 
 const suitcase = {
+    suitcaseId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     stocksQuantity: {
         type: DataTypes.STRING
     },

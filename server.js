@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 const errorHandler = require('./helpers/error-handler');
-const { saveMockData, syncModels, modelsAssociations } = require('./_db/onInit')
+const { saveMockData, syncModels, modelsAssociations, removeModels } = require('./_db/onInit')
+removeModels().then(() => console.log("Models removed"))
 modelsAssociations().then(() => syncModels().then(() => saveMockData()))
-
 
 
 app.use('/', require('./_controllers/api.controller'));
