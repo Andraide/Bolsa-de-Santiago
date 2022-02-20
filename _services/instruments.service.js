@@ -1,5 +1,7 @@
 ﻿const https = require("https");
 const fetch = require("node-fetch");
+const crud = require('../db/crud/crud');
+const { User, Instrument } = require("../db/models/models");
 const urlVikings = "https://imdb-api.com/en/API/SearchMovie/k_job2e7ku/viking";
 const urlFullCastById = "https://imdb-api.com/en/API/FullCast/k_job2e7ku/"
 const urlAxes = "https://imdb-api.com/en/API/SearchMovie/k_job2e7ku/axe";
@@ -45,17 +47,39 @@ async function getInstrumentosValidos()
     return axes
 }
 
-async function getMoviesDB(query)
+
+async function getUserInstruments(idUser)
 {
-    let movies = await crud.find(Movie, query)
-    let movieFiltered = movies.map((movie) => {
-        const { Title, Year, Released, Genre, Director, Actors, Plot, Ratings } = movie
-        return { Title, Year, Released, Genre, Director, Actors, Plot, Ratings }
-    })
-    return movieFiltered
+    console.log("Id user", idUser)
+    try
+    {
+        let suitcase = await crud.find(Instrument, JSON.parse(idUser))
+        return suitcase
+    }
+    catch(err)
+    {
+        console.log("Eror on getUserInstruments", err)
+        throw err
+    }
+}
+
+async function removeAll()
+{
+    try
+    {
+        await crud.removeAll(User)
+        await crud.removeAll(Instrument)
+    }
+    catch(err)
+    {   
+        console.log("Error on removeAll", err)
+        throw err
+    }
 }
 
 
 module.exports = {
-    getInstrumentosValidos
+    getInstrumentosValidos,
+    getUserInstruments,
+    removeAll
 };

@@ -12,7 +12,7 @@ async function initData()
         {
             await crud.save(Instrument, j)
         }
-        console.log("Save!")
+        console.log("Mock data saved!")
     }
     catch(err)
     {

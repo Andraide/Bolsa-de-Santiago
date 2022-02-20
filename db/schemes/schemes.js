@@ -42,6 +42,7 @@ const instrument = new Schema ({
     },
     instruments: {
         type: String,
+        unique: true
     },
     lastPrice: {
         type: String,
