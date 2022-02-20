@@ -19,7 +19,7 @@ const mockInstrument = [{
     tradeAmount: "522712966",
     tradeVolume: "18783974",
     trend: "-",
-    stocksQuantity: "200",
+    stocksQuantity: "22345",
     boughtPrice: "27.36"
 },{
     userId: '16543545-5',
@@ -35,7 +35,7 @@ const mockInstrument = [{
     tradeAmount: "522712966",
     tradeVolume: "18783974",
     trend: "-",
-    stocksQuantity: "200",
+    stocksQuantity: "13257",
     boughtPrice: "27.36"
 },{
     userId: '16543545-5',
@@ -51,7 +51,7 @@ const mockInstrument = [{
     tradeAmount: "522712966",
     tradeVolume: "18783974",
     trend: "-",
-    stocksQuantity: "200",
+    stocksQuantity: "72458",
     boughtPrice: "27.36"
 }]
 

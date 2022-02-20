@@ -3,7 +3,7 @@ const app = express();
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const errorHandler = require('./helpers/error-handler');
-const cors = require('./cors/cors')
+const cors = require('cors')
 
 
 //Initialize db with mockdata
@@ -15,13 +15,14 @@ mongoose.connect('mongodb://127.0.0.1:27017/test')
     .catch(error => console.log("Error connecting to Db", error))
 initData()
 
+app.use(cors())
 app.use(morgan('combined'))
 var options = {
   inflate: true,
   limit: '100kb',
   type: 'application/json'
 };
-app.use(cors)
+
 app.use(bodyParser.raw(options))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())

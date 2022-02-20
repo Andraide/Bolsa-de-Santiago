@@ -8,15 +8,16 @@
     "test": "jest"
   },
   "jest": {
-  "testEnvironment": "node",
-  "coveragePathIgnorePatterns": [
-    "/node_modules/"
-  ]
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^6.2.2",
     "morgan": "^1.10.0",

@@ -11,34 +11,41 @@ const host = "https://startup.bolsadesantiago.com"
 const paths = 
 {
     consulta: "/api/consulta/",
-    getInstrumentosValidos: "InstrumentosDisponibles/getInstrumentosValidos"
+    getInstrumentosValidos: "InstrumentosDisponibles/getInstrumentosValidos",
+    getInstrumentsToInvest: "ClienteMD/getInstrumentosRV"
 }
 
 const url = new URL(host)
 url.search = "?access_token=E1F1BB3912B5491BB0AB9285A80E9FA7"
+
+
 
 const headers = 
 {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
 }
+
 const requestOptions = 
 {
-    method: 'POST',
-    headers
+    post : { 
+        method: 'POST',
+        headers
+    }
 }
 
-async function getData(path) {
-        try {
-            url.pathname = path
-            const response = await fetch(url.href, requestOptions);
-            console.log("res", response)
-            const json = await response.json();
-            return json
-        } catch (error) {
-            console.log("Error on getData", error);
-        }
-      }
+
+async function getData(path, requestOptions) {
+    try {
+        url.pathname = path
+        console.log("URL", url.href, "REQUEST OPTIONS", requestOptions)
+        const response = await fetch(url.href, requestOptions);
+        const json = await response.json();
+        return json
+    } catch (error) {
+        console.log("Error on getData", error);
+    }
+}
 
 
 async function getInstrumentosValidos()
@@ -53,12 +60,26 @@ async function getUserInstruments(idUser)
     console.log("Id user", idUser)
     try
     {
-        let suitcase = await crud.find(Instrument, JSON.parse(idUser))
+        let suitcase = await crud.find(Instrument, idUser)
         return suitcase
     }
     catch(err)
     {
         console.log("Eror on getUserInstruments", err)
+        throw err
+    }
+}
+
+async function getInstrumentsToInvest()
+{
+    try
+    {
+        const { listaResult } = await getData(paths.consulta + paths.getInstrumentsToInvest, requestOptions.post)
+        return listaResult
+    }
+    catch(err)
+    {
+        console.log("Eror on getInstrumentsToInvest", err)
         throw err
     }
 }
@@ -81,5 +102,6 @@ async function removeAll()
 module.exports = {
     getInstrumentosValidos,
     getUserInstruments,
+    getInstrumentsToInvest,
     removeAll
 };

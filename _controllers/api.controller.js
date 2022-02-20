@@ -5,6 +5,7 @@ const instrumentsService = require('../_services/instruments.service');
 router.get('/getUser', getUser)
 router.post('/getInstrumentosValidos', getInstrumentosValidos)
 router.post('/getUserInstruments', getUserInstruments)
+router.get('/getInstrumentsToInvest', getInstrumentsToInvest)
 router.get('/remove', removeAll)
 
 async function getUser(req, res, next)
@@ -39,6 +40,14 @@ function getInstrumentosValidos(req, res, next)
         .then(instrumentos => res.json(instrumentos))
         .catch(err => next(err));
 }
+
+function getInstrumentsToInvest(req, res, next)
+{
+    console.log("Getting instruments to invest")
+    instrumentsService.getInstrumentsToInvest()
+        .then(instruments => res.json(instruments))
+        .catch(err => next(err));
+}   
 
 
 module.exports = router;
