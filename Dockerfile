@@ -9,8 +9,8 @@ WORKDIR /root/
 COPY --from=ui-build /usr/src/app/my-app/dist ./my-app/dist
 COPY package*.json ./
 RUN npm install
-COPY index.js .
+COPY . .
 
 EXPOSE 3080
 
-CMD ["node", "index.js"]
+CMD ["npm", "start"]

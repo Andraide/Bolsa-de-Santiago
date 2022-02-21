@@ -23,6 +23,7 @@ var options = {
   type: 'application/json'
 };
 
+app.use(express.static(process.cwd()+"/my-app/dist/bolsa-santiago/"));
 app.use(bodyParser.raw(options))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
@@ -31,7 +32,7 @@ app.use(errorHandler);
 
 
 
-const port = process.env.NODE_ENV === true ? 3080 : 3080;
+const port = process.env.NODE_ENV === true ? 8080 : 8080;
 app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });

@@ -12,7 +12,8 @@ router.get('/remove', removeAll)
 
 async function getDist(req, res, next)
 {
-    res.sendFile(process.cwd()+"/my-app/dist/angular-nodejs-example/index.html")
+    console.log("Sending the fron")
+    res.sendFile(process.cwd()+"/my-app/dist/bolsa-santiago/index.html")
 }
 
 async function getUser(req, res, next)
