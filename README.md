@@ -1,7 +1,7 @@
 
 # Ripley tech challenge for Cross team.
 
-> To run the project:
+### To run the project:
 
 
 
