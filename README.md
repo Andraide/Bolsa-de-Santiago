@@ -3,18 +3,20 @@
 
 > To run the project:
 
-> Build the image
+
+
+> :one: Build the image
 
 ```shell
 docker build -t username/image-name .
 ```
-> Start your cluster
+> :two: Start your cluster
 
 ```shell
 minikube start
 ```
 
-> Run angular-webapp service
+>:three: Run angular-webapp service
 
 ```shell
 kubectl create -f manifest.yml
