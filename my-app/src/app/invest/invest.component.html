@@ -1,0 +1,6 @@
+<mat-card *ngFor="let instrument of instruments$ | async">
+    <mat-card-title>{{ instrument.instruments }}</mat-card-title>
+    <mat-card-subtitle>{{ instrument.instruments }}</mat-card-subtitle>
+    <mat-card-subtitle>Price: {{ instrument.lastPrice }}$</mat-card-subtitle>
+    <mat-card-subtitle>Trade volume: {{ instrument.tradeVolume }}</mat-card-subtitle>
+</mat-card>

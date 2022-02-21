@@ -1,0 +1,7 @@
+<mat-card *ngFor="let instrument of suitcase$ | async">
+  <mat-card-header>
+    <mat-card-title>{{ instrument.instruments }}</mat-card-title>
+    <mat-card-subtitle class="card-subtitle">Amount of stocks: {{ instrument.stocksQuantity }}</mat-card-subtitle>
+    <mat-card-subtitle class="card-subtitle">Bought at: {{ instrument.boughtPrice }}$</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

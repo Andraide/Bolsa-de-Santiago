@@ -2,11 +2,18 @@
 const router = express.Router();
 const instrumentsService = require('../_services/instruments.service');
 
+router.get('/', getDist)
 router.get('/getUser', getUser)
 router.post('/getInstrumentosValidos', getInstrumentosValidos)
 router.post('/getUserInstruments', getUserInstruments)
 router.get('/getInstrumentsToInvest', getInstrumentsToInvest)
 router.get('/remove', removeAll)
+
+
+async function getDist(req, res, next)
+{
+    res.sendFile(process.cwd()+"/my-app/dist/angular-nodejs-example/index.html")
+}
 
 async function getUser(req, res, next)
 {
