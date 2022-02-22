@@ -8,12 +8,14 @@ const cors = require('cors')
 
 //Initialize db with mockdata
 const { saveMockData, syncModels, modelsAssociations, removeModels, saveOneMockData, initData } = require('./db/onInit')
+initData()
 //removeModels().then(() => console.log("Models removed"))
 //syncModels().then(() => modelsAssociations().then(() => syncModels().then(() => saveMockData().then(() => saveOneMockData()))))
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/test')
-    .catch(error => console.log("Error connecting to Db", error))
+mongoose.connect('mongodb://mongodb-svc:27017/test')
+  .catch(error => console.log("Error connecting to Db", error))
 initData()
+//127.0.0.1
 
 app.use(cors())
 app.use(morgan('combined'))

@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: /data/mongoData
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: data-claim
+spec:
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+  requests:
+  storage: 3Gi
+
+  ---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  template:
+    metadata:
+    labels:
+      app: db
+    spec:
+      restartPolicy: Always
+    volumes:
+      - name: data-storage
+      persistentVolumeClaim:
+      claimName: data-claim
+    containers:
+      - name: mongodb-container
+      image: "de13/mongo-myapp"
+    volumeMounts:
+      - name: data-storage
+      mountPath: /var/lib/mongo
+    ports:
+      - containerPort: 27017
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: mongodb-svc
+spec:
+  selector:
+    app: db
+  ports:
+    - protocol: TCP
+    port: 27017
+
+  apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nodejs-configmaps
+data:
+  URI: mongodb://mongodb-svc:27017/test
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nodejs
+spec:
+  replicas: 1
+  template:
+    metadata:
+    labels:
+      app: frontend
+    spec:
+      containers:
+        - name: nodejs-container
+        image: "de13/testseven"
+        env:
+          - name: URI
+          valueFrom:
+          configMapKeyRef:
+          name: nodejs-configmaps
+          key: URI
+
+---
+
+apiVersion: v1
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodejs-svc
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+    port: 8080
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nodejs-ingress
+spec:
+  rules:
+    - http:
+    paths:
+      - path: /testseven
+    backend:
+      serviceName: nodejs-svc
+      servicePort: 8080
+  

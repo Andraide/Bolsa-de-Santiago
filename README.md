@@ -4,7 +4,6 @@
 ### To run the project:
 
 
-
 > :one: Build the image
 
 ```shell
@@ -20,4 +19,10 @@ minikube start
 
 ```shell
 kubectl create -f manifest.yml
+```
+
+>:four: start the service
+
+```shell
+minikube service angular-webapp
 ```
