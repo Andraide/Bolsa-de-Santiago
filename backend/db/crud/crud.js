@@ -24,11 +24,7 @@ async function update(model, query, replace)
 {
     try 
     {
-        console.log("Title", query)
-        console.log("Replace", replace)
-        let filter = { Title: query }
-        let updateObj = { Plot: replace }
-        await model.findOneAndUpdate(filter, updateObj, { new: true }, (err, doc) => {
+        await model.findOneAndUpdate(query, replace, { new: true }, (err, doc) => {
             if(err) console.log("Not updated")
             console.log("Updated")
         }).clone().catch(function(err){console.log("Update error", err)})

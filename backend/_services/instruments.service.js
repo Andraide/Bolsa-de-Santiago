@@ -1,38 +1,11 @@
-﻿const https = require("https");
-const fetch = require("node-fetch");
+﻿const fetch = require("node-fetch");
 const crud = require('../db/crud/crud');
 const { User, Instrument } = require("../db/models/models");
-const urlVikings = "https://imdb-api.com/en/API/SearchMovie/k_job2e7ku/viking";
-const urlFullCastById = "https://imdb-api.com/en/API/FullCast/k_job2e7ku/"
-const urlAxes = "https://imdb-api.com/en/API/SearchMovie/k_job2e7ku/axe";
-const urlByTitle = "https://imdb-api.com/en/API/Title/k_job2e7ku/";
-
+const paths = require("../_constants/_paths")
+const requestOptions = require("../_constants/_requestOptions")
 const host = "https://startup.bolsadesantiago.com"
-const paths = 
-{
-    consulta: "/api/consulta/",
-    getInstrumentosValidos: "InstrumentosDisponibles/getInstrumentosValidos",
-    getInstrumentsToInvest: "ClienteMD/getInstrumentosRV"
-}
-
 const url = new URL(host)
 url.search = "?access_token=E1F1BB3912B5491BB0AB9285A80E9FA7"
-
-
-
-const headers = 
-{
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-}
-
-const requestOptions = 
-{
-    post : { 
-        method: 'POST',
-        headers
-    }
-}
 
 
 async function getData(path, requestOptions) {

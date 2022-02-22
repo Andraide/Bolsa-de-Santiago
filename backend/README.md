@@ -26,3 +26,13 @@ kubectl create -f manifest.yml
 ```shell
 minikube service angular-webapp
 ```
+
+
+Build backend image
+deployments
+kubectl apply -f node-deployment.yaml
+kubectl apply -f node-service.yaml
+
+kubectl apply -f nginx-deployment.yaml
+
+kubetlc appy -f mongo-deployment.yaml

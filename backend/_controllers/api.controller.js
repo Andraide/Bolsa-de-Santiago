@@ -2,19 +2,26 @@
 const router = express.Router();
 const instrumentsService = require('../_services/instruments.service');
 
-router.get('/', getDist)
+//router.get('/', getDist)
+router.get('/ping', getPong)
 router.get('/getUser', getUser)
 router.post('/getInstrumentosValidos', getInstrumentosValidos)
 router.post('/getUserInstruments', getUserInstruments)
 router.get('/getInstrumentsToInvest', getInstrumentsToInvest)
 router.get('/remove', removeAll)
 
+async function getPong(req, res, next)
+{
+    res.send("Pong")
+}
 
-async function getDist(req, res, next)
+
+
+/*async function getDist(req, res, next)
 {
     console.log("Sending the fron")
     res.sendFile(process.cwd()+"/my-app/dist/bolsa-santiago/index.html")
-}
+}*/
 
 async function getUser(req, res, next)
 {

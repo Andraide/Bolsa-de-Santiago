@@ -12,7 +12,7 @@ initData()
 //removeModels().then(() => console.log("Models removed"))
 //syncModels().then(() => modelsAssociations().then(() => syncModels().then(() => saveMockData().then(() => saveOneMockData()))))
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://mongodb-svc:27017/test')
+mongoose.connect('mongodb://mongo-service:27017/test')
   .catch(error => console.log("Error connecting to Db", error))
 initData()
 //127.0.0.1
@@ -34,7 +34,7 @@ app.use(errorHandler);
 
 
 
-const port = process.env.NODE_ENV === true ? 8080 : 8080;
+const port = process.env.NODE_ENV === true ? 3000 : 3000;
 app.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
