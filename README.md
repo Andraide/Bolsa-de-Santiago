@@ -24,14 +24,19 @@ minikube tunnel
 
 ### To run the project without a cluster:
 
+> :one: Start your mongodb
 
-> :one: Install the depencies and start the server
+```shell
+mongod
+```
+
+> :two: Install the depencies and start the server
 
 ```shell
 cd backend && npm i && npm start
 ```
 
->:two: Intall the depencies for the frontend
+>:three: Intall the depencies for the frontend
 
 ```shell
 cd frontend && npm i && npm start
