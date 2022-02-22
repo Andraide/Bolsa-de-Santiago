@@ -3,4 +3,4 @@ RUN apk add nano && apk add curl
 COPY ./dist/bolsa-santiago /usr/share/nginx/html
 RUN rm -rf /etc/nginx/conf.d/default.conf
 COPY ./nginx.conf /etc/nginx/conf.d
-EXPOSE 8080
+EXPOSE 80

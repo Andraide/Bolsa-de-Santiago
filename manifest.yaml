@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: blog-node-container
-          image: backend
+          image: andraide/backend
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
@@ -65,10 +65,10 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: frontend
+          image: andraide/frontend
           imagePullPolicy: Never
           ports:
-            - containerPort: 8080 
+            - containerPort: 80 
 ---
 
 
@@ -85,8 +85,8 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 80
+      targetPort: 80
   selector:
     app: frontend-pod
 ---
