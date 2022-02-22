@@ -1,0 +1,9 @@
+upstream node-service{
+     server node-service:3000;
+}
+
+ location /api {
+        proxy_pass http://node-service;
+    }
+
+ 

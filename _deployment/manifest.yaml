@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: blog-node-container
-          image: backendthree
+          image: backend
           imagePullPolicy: Never
           ports:
             - containerPort: 3000
@@ -65,7 +65,7 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: frontnginx
+          image: frontend
           imagePullPolicy: Never
           ports:
             - containerPort: 8080 
