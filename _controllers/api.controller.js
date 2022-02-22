@@ -1,8 +1,9 @@
 ﻿const express = require('express');
 const router = express.Router();
 const instrumentsService = require('../_services/instruments.service');
+const loginService = require('../_services/login.service')
 
-router.get('/getUser', getUser)
+router.post('/getUser', getUser)
 router.post('/getInstrumentosValidos', getInstrumentosValidos)
 router.post('/getUserInstruments', getUserInstruments)
 router.get('/getInstrumentsToInvest', getInstrumentsToInvest)
@@ -10,9 +11,9 @@ router.get('/remove', removeAll)
 
 async function getUser(req, res, next)
 {
-    /*instrumentsService.getUserInstruments()
-        .then(instrumentos => res.json(instrumentos))
-        .catch(err => next(err));*/
+    loginService.getUser(req.body)
+        .then(user => res.json(user))
+        .catch(err => next(err))
 }
 
 async function removeAll(req, res, next)
@@ -24,12 +25,8 @@ async function removeAll(req, res, next)
 
 async function getUserInstruments(req, res, next)
 {
-    console.log("req body", req.body)
     instrumentsService.getUserInstruments(req.body)
-        .then(instrumentos => { 
-            res.json(instrumentos) 
-            console.log(instrumentos)
-        })
+        .then(instrumentos => res.json(instrumentos))
         .catch(err => next(err));
 }
 
@@ -43,7 +40,6 @@ function getInstrumentosValidos(req, res, next)
 
 function getInstrumentsToInvest(req, res, next)
 {
-    console.log("Getting instruments to invest")
     instrumentsService.getInstrumentsToInvest()
         .then(instruments => res.json(instruments))
         .catch(err => next(err));
