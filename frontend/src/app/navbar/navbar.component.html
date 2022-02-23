@@ -34,7 +34,10 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Bienvenido user</span>
+      
+        <div *ngFor="let user of user$ | async">
+            <span>Bienvenido {{ user.firstName }} {{ user.lastName }}</span>
+        </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

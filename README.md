@@ -22,26 +22,29 @@ kubectl apply -f manifest.yaml
 minikube tunnel
 ```
 
->:four: visit [link](http://localhost)
+>:four: visit [link](http://localhost) http://localhost
 
 ### To run the project without a cluster:
 
-> :one: Start your mongodb
+> :one: Start your mongodb and switch mongo url on index.s file
+```shell
+mongo url => mongodb://127.0.0.1:27017/test
+```
 
 ```shell
 mongod
 ```
 
-> :two: Install the depencies and start the server
+> :two: Install the dependecies and start the server
 
 ```shell
 cd backend && npm i && npm start
 ```
 
->:three: Intall the depencies for the frontend
+>:three: Intall the dependecies for the frontend
 
 ```shell
 cd frontend && npm i && npm start
 ```
 
->:four: visit [link](http://localhost:4200)
+>:four: visit [link](http://localhost:4200) http://localhost:4200
