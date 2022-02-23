@@ -22,6 +22,8 @@ kubectl apply -f manifest.yaml
 minikube tunnel
 ```
 
+>:four: visit [link](http://localhost)
+
 ### To run the project without a cluster:
 
 > :one: Start your mongodb
@@ -41,3 +43,5 @@ cd backend && npm i && npm start
 ```shell
 cd frontend && npm i && npm start
 ```
+
+>:four: visit [link](http://localhost:4200)

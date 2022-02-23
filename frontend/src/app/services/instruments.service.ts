@@ -18,7 +18,7 @@ export class IntrumentsService {
     };
     return this.http
       .post(
-         'http://localhost:3000/getUserInstruments',
+         'http://localhost:3000/api/getUserInstruments',
         body.toString(),
         httpOptions
        )
@@ -31,7 +31,7 @@ export class IntrumentsService {
     };
     return this.http
       .get(
-         'http://localhost:3000/getInstrumentsToInvest',
+         'http://localhost:3000/api/getInstrumentsToInvest',
           httpOptions
        )
       .pipe(map((data: any) => data));

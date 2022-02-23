@@ -7,17 +7,16 @@ const cors = require('cors')
 
 
 //Initialize db with mockdata
-const { saveMockData, syncModels, modelsAssociations, removeModels, saveOneMockData, initData } = require('./db/onInit')
+const { initData } = require('./db/onInit')
 initData()
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://mongo-service:27017/test')
+mongoose.connect('mongodb://127.0.0.1:27017/test')
   .catch(error => console.log("Error connecting to Db", error))
 
 
 app.use(cors())
 app.use(morgan('combined'))
-//app.use(express.static(process.cwd()+"/my-app/dist/bolsa-santiago/"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 app.use('/api', require('./_controllers/api.controller'));
